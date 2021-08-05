@@ -18,7 +18,7 @@ from django.contrib.auth.models import User
 from users.models import Profile
 
 #Serializer
-from users.serializers.users import NewUserSerializer, UserSerializer
+from users.serializers.users import NewUserSerializer, UserSerializer, ProfileSerializer
 from users.serializers.signup import UserSignupSerializer
 from users.serializers.verified import AccountVerificationSerializer
 
@@ -37,6 +37,8 @@ class ProfileCompletionViewSet(mixins.UpdateModelMixin,
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes=[IsAuthenticated,IsOwnProfile]
+
+    
 
 @api_view(['POST'])
 def signup(request):
