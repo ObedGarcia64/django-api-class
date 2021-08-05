@@ -35,18 +35,18 @@ class UserSignupSerializer(serializers.Serializer):
     password = serializers.CharField(min_length=8, max_length=128, allow_blank=False)
     password_confirmation = serializers.CharField(min_length=8, max_length=128, allow_blank=False)
 
-    profile_picture = serializers.ImageField()
-    header_img = serializers.ImageField()
+#    profile_picture = serializers.ImageField()
+#    header_img = serializers.ImageField()
 
-    first_name = serializers.CharField(max_length=150, allow_blank=False)
-    last_name = serializers.CharField(max_length=150, allow_blank=False)
-    age=serializers.IntegerField()
+#    first_name = serializers.CharField(max_length=150, allow_blank=False)
+#    last_name = serializers.CharField(max_length=150, allow_blank=False)
+#    age=serializers.IntegerField()
 
-    city = serializers.CharField(max_length=100, allow_blank=False)
-    country = serializers.CharField(max_length=100, allow_blank=False)
-    likes = serializers.IntegerField()
-    followers = serializers.IntegerField()
-    posts = serializers.IntegerField()
+#    city = serializers.CharField(max_length=100, allow_blank=False)
+#    country = serializers.CharField(max_length=100, allow_blank=False)
+#    likes = serializers.IntegerField()
+#    followers = serializers.IntegerField()
+#    posts = serializers.IntegerField()
 
     def validate(self, data):
         """ verify password match and not too common """
@@ -66,23 +66,21 @@ class UserSignupSerializer(serializers.Serializer):
         data.pop('password_confirmation')
 
 
-        user = User.objects.create(
+        user = User.objects.create_user(
             username=data['username'],
             password=data['password'],
-            first_name=data['first_name'],
-            last_name=data['last_name'],
             email=data['email']
         )
 
         profile = Profile(user=user)
-        profile.profile_picture = data['profile_picture']
-        profile.header_img = data['header_img']
-        profile.age=data['age']
-        profile.city=data['city']
-        profile.country=data['country']
-        profile.likes=data['likes']
-        profile.followers=data['followers']
-        profile.posts=data['posts']
+#        profile.profile_picture = data['profile_picture']
+#        profile.header_img = data['header_img']
+#        profile.age=data['age']
+#        profile.city=data['city']
+#        profile.country=data['country']
+#        profile.likes=data['likes']
+#        profile.followers=data['followers']
+#        profile.posts=data['posts']
         profile.is_verified=False
 
         profile.save()
